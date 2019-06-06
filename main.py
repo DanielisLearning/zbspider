@@ -4,21 +4,7 @@ from zbspider.mode.sqlmanager import SQLManager
 from zbspider.myemail import mail_to_user
 import time
 
-def mail_msg(data):
-    td_html = ""
-    for td in reversed(data):
-        td_html += "<tr><td>"+td['title']+"</td><td>"\
-            +td['link']+"</td><td>"+td['time']+"</td></tr>"
-    html = """
-    <table>
-        <tr>
-            <th>项目名称</th>
-            <th>项目链接</th>
-            <th>更新时间</th>
-        </tr>"""+td_html+"""
-    </table>
-    """
-    return html
+
 
 
 if __name__ == '__main__':
@@ -48,8 +34,7 @@ if __name__ == '__main__':
             # print(results)
             page = page + 1
             time.sleep(120)
-    mail_message = mail_msg(results)
-    mail_to_user(mail_message)
+    mail_to_user(results)
     # 若不存在： 获取下一页数据,补全列表，直到存在
     for result in reversed(results):
         # print(result)
