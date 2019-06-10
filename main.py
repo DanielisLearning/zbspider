@@ -2,12 +2,11 @@ from zbspider.spider import spider_run
 from zbspider.mparser import parser_run
 from zbspider.mode.sqlmanager import SQLManager
 from zbspider.myemail import mail_to_user
+from zbspider import ZBSpider
 import time
+from config import Config
 
-
-
-
-if __name__ == '__main__':
+def main():
     # 开启数据库控制
     sql = SQLManager()
     # 查询最后一个数据
@@ -41,3 +40,7 @@ if __name__ == '__main__':
         sql.insert(result)
     # 关闭数据库
     sql.close()
+
+
+if __name__ == '__main__':
+    main()
