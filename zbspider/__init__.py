@@ -3,6 +3,11 @@
 功能：
 整合四个子功能模块
 """
+from .mode.sqlmanager import SQLManager
+from .spider import spider_run, Spider
+from .mparser import parser_run
+from .myemail import mail_to_user
+import time
 
 class ZBSpider(object):
     """
@@ -11,12 +16,12 @@ class ZBSpider(object):
 
     def __init__(self,config):
         self.config = config
+        self.sql = SQLManager(self.config.DATABASE)
+        self.spider = Spider(self.config.URL, self.config.PARAMS, self.config.HEADERS, self.config.COOKIES)
 
-    def run():
-        # 开启数据库控制
-        sql = SQLManager()
+    def run(self):
         # 查询最后一个数据
-        last_one_title = sql.get_last_one_title()
+        last_one_title = self.sql.get_last_one_title()
         # 建立results列表
         results = []
         page = 1
@@ -38,11 +43,11 @@ class ZBSpider(object):
                 results += parser_run(html_doc)
                 # print(results)
                 page = page + 1
-                time.sleep(120)
+                time.sleep(56)
         mail_to_user(results)
         # 若不存在： 获取下一页数据,补全列表，直到存在
         for result in reversed(results):
             # print(result)
-            sql.insert(result)
+            self.sql.insert(result)
         # 关闭数据库
-        sql.close()
+        self.sql.close()

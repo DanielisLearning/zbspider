@@ -1,22 +1,22 @@
 import sqlite3
-from ..settings import DATABASE
 from . import dbprint
 
 class SQLManager(object):
     __tablename__ = "zbtable"
 
-    def __init__(self): 
+    def __init__(self, database): 
         #实例化后自动执行此函数
-        self.connect()
+        self.connect(database)
         try:
             self.create()
-            dbprint("created table successfully")
+            # dbprint("created table successfully")
         except:
-            dbprint("created table failed")
+            pass
+            # dbprint("created table failed")
 
-    def connect(self): 
+    def connect(self, database): 
         # 进入数据库，创建游标
-        self.conn = sqlite3.connect(DATABASE)
+        self.conn = sqlite3.connect(database)
         self.cursor = self.conn.cursor()
         dbprint("Opened database successfully")
         

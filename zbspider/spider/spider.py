@@ -14,7 +14,8 @@ class Spider(object):
         self.headers = headers
         self.cookies = cookies
 
-    def get(self):
+    def get(self, page=1):
+        self.params['page'] = page
         try:
             web = requests.get(self.url, params=self.params, headers=self.headers, cookies=self.cookies)
         except ConnectionResetError:
