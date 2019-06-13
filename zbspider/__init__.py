@@ -4,20 +4,21 @@
 整合四个子功能模块
 """
 from .mode.sqlmanager import SQLManager
-from .spider import spider_run, Spider
+from .spider import Spider
 from .mparser import parser_run
 from .myemail import mail_to_user
 import time
+
 
 class ZBSpider(object):
     """
     主程序类
     """
 
-    def __init__(self,config):
+    def __init__(self, config):
         self.config = config
         self.sql = SQLManager(self.config.DATABASE)
-        self.spider = Spider(self.config.URL, self.config.PARAMS, self.config.HEADERS, self.config.COOKIES)
+        self.spider = Spider(self.config.URL, **self.config.SPIDER)
 
     def run(self):
         # 查询最后一个数据
@@ -36,9 +37,9 @@ class ZBSpider(object):
                 # print(results)
                 break
             else:
-                print("不存在%d" %(page))
+                print("不存在%d" % (page))
                 # 爬取网页
-                html_doc = spider_run(page)
+                html_doc = self.spider.get(page)
                 # 分析网页，获得结果
                 results += parser_run(html_doc)
                 # print(results)
