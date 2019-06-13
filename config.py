@@ -16,7 +16,7 @@ class Config():
         'user': 'xf@fjiti.com',
         'pass': 'hegexinfu123',
         'sender': 'xf@fjiti.com',
-        'receivers': 'grq@fjiti.com'
+        'receivers': ['grq@fjiti.com']
     }
     # 爬取页面
     URL = "https://www.zbytb.com/zb/search.php"

@@ -3,24 +3,25 @@
 """
 from email.header import Header
 from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+
 
 # 邮件中的HTML内容
-#TODO: html下td的修改
+# TODO: html下time列的修改
 def mail_msg(text):
     td_html = ""
     for data in reversed(text):
-        td_html += "<tr><td><a herf=\""+ data['link'] +"\">"+data['title']+"</a></td><td>"\
-            +data['time']+"</td></tr>"
+        td_html += "<tr><td><a href=\"" + data['link'] + "\">" + data['title'] + "</a></td><td>"\
+            + data['time'] + "</td></tr>"
     html = """
     <table>
         <tr>
             <th>项目名称</th>
             <th>更新时间</th>
-        </tr>"""+td_html+"""
+        </tr>""" + td_html + """
     </table>
     """
     return html
+
 
 # 邮件格式内容
 def mail_content(sender, receiver, text):

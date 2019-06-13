@@ -45,7 +45,7 @@ class ZBSpider(object):
                 # print(results)
                 page = page + 1
                 time.sleep(56)
-        mail_to_user(results)
+        mail_to_user(self.config.EMAIL, results)
         # 若不存在： 获取下一页数据,补全列表，直到存在
         for result in reversed(results):
             # print(result)
