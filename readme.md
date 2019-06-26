@@ -18,3 +18,12 @@
 - 网页内容分析(mparser)
 - 邮件处理(myemail)
 - 网页获取模块(spider)
+
+---
+
+TODO:
+
+1. 格式化的log
+1. 格式化的error
+1. 增强test
+1. 分词优化
