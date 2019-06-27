@@ -26,7 +26,7 @@ def mail_msg(text):
 # 邮件格式内容
 def mail_content(sender, receiver, text):
     msg = MIMEText(text, 'html', 'utf-8')
-    msg['From'] = sender
+    msg['From'] = "福建省和格信息技术服务有限公司" + sender
     msg['To'] = ";".join(receiver)
     msg['Subject'] = Header('中国采购招标网采购结果', 'utf-8').encode()
     return msg

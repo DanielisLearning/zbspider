@@ -1,9 +1,8 @@
 from bs4 import BeautifulSoup
-import re
 
 
 def parser_run(html_doc):
-    zbxm_list = [] # 招标项目列表
+    zbxm_list = []  # 招标项目列表
     soup = BeautifulSoup(html_doc, 'html.parser')
     for tr in soup.find_all('tr', class_='hover_tr'):
         time = tr.find('td', class_='color_9').get_text()
