@@ -50,3 +50,8 @@ class Config():
             "page": 0,
         },
     }
+
+
+class TestConfig(Config):
+    TESTING = True
+    DEBUG = True
