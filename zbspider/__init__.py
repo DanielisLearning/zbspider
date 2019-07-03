@@ -33,6 +33,10 @@ class ZBSpider(object):
         results = []
         page = 1
         while True:
+            if page == 505:
+                zbprint("该标的存在问题，换一个查询标的")
+                last_one_title = self.sql.get_last_one_title("1")
+                page = 1
             # 检查数据是否在列表中存在
             if last_one_title in results:
                 # 若存在： 按顺序分割列表，将顺序后的数据存入数据库
@@ -53,7 +57,7 @@ class ZBSpider(object):
                 results += parser_run(html_doc)
                 # print(results)
                 page = page + 1
-                time.sleep(56)
+                time.sleep(120)
         mail_to_user(self.config.EMAIL, results)
         zbprint("提取的数据已发送到相关邮箱")
         # 若不存在： 获取下一页数据,补全列表，直到存在

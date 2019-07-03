@@ -40,10 +40,10 @@ class SQLManager(object):
         self.cursor.execute(_sql)
         self.conn.commit()
 
-    def get_last_one_title(self):
+    def get_last_one_title(self, desc="0"):
         # 获取id最大的数据
         _sql = "SELECT TITLE,LINK,TIME FROM " + self.__tablename__ + \
-               " WHERE ID=(SELECT MAX(ID) FROM " + self.__tablename__ + \
+               " WHERE ID=(SELECT MAX(ID)-" + desc + " FROM " + self.__tablename__ + \
                ");"
         # print(_sql)
         self.cursor.execute(_sql)
