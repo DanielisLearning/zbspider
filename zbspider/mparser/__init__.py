@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-
+import jieba
 
 def parser_run(html_doc):
     zbxm_list = []  # 招标项目列表
@@ -14,3 +14,19 @@ def parser_run(html_doc):
         zbxm_list.append(zbxm)
     # print(zbxm_list)
     return zbxm_list
+
+def is_kw_title(title, kw_list):
+    """
+    解析结果中title部分
+    是否包含一些关键词
+    bool 函数
+    @param title : 招标文件的标题，字符串
+    @param *args : 关键词列表
+    @return : True or False
+    """
+    seg_list = jieba.cut(title)
+    kw_title = [x for x in seg_list if x in kw_list]
+    if kw_title is None:
+        return False
+    else:
+        return True
